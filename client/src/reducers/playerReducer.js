@@ -15,7 +15,7 @@ const initialState = {
         }, 
         {
             id : uuid(), 
-            battletag: "peepeepoopoo",
+            battletag: "okay i had to fuck with the store",
             teamid: "team2",
             avgsr: "0989",
             tanksr: "9766",
