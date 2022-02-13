@@ -20,7 +20,7 @@ class TeamList extends Component {
         const { players } = this.props.player;
         return (
             <Container>
-                <Table>
+                <Table striped>
                     <thead>
                         <tr>
                             <th></th>
@@ -50,7 +50,17 @@ class TeamList extends Component {
                             <td>{ tanksr }</td>
                             <td>{ dmgsr }</td>
                             <td>{ suppsr }</td>
-                            <td>{ topHeros }</td>
+                            <td>
+                                <ListGroup>
+                                    {console.log(Object.values(topHeros))}
+                                    {Object.values(topHeros).map((hero) => {
+                                        {console.log(hero)}
+                                        <ListGroup.Item>
+                                            { hero }
+                                        </ListGroup.Item>
+                                    })}
+                                </ListGroup>
+                            </td>
                         </tr>
                     ))}
                     </tbody>

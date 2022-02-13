@@ -69,7 +69,8 @@ class PlayerModal extends Component {
                 };
                 }
                 newPlayer.avgsr = json.rating;
-                newPlayer.topHeros = topHeros.map(hero => hero[0]);
+                const topHerosList = topHeros.map(hero => hero[0]);
+                topHerosList.forEach((hero) => newPlayer.topHeros.heroName = hero)
             };
             console.log("newplayer here", newPlayer);
             this.props.addPlayer(newPlayer);

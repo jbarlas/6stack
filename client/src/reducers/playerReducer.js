@@ -11,7 +11,10 @@ const initialState = {
             tanksr: "2345",
             dmgsr: "3456",
             suppsr: "5678",
-            topHeros: ""
+            topHeros: {
+                ana: 'Ana',
+                bap: 'Bap'
+            }
         }, 
         {
             id : uuid(), 
@@ -21,7 +24,10 @@ const initialState = {
             tanksr: "9766",
             dmgsr: "6545",
             suppsr: "2352",
-            topHeros: ""
+            topHeros: {
+                rein: 'Rein',
+                zar: 'zar'
+            }
         }
     ]
 }
