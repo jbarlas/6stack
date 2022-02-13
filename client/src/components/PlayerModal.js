@@ -19,12 +19,6 @@ class PlayerModal extends Component {
         modal: false,
         loading: false,
         battleTag: '',
-        teamid: '',
-        avgsr: '',
-        tanksr: '',
-        dmgsr: '',
-        suppsr: '',
-        topHeros: []
     }
 
     toggle = () => {
@@ -43,34 +37,6 @@ class PlayerModal extends Component {
         this.setState({ battleTag: e.target.value });
     }
 
-    AddPlayerButton = () => {
-        return (
-            <Button
-                color='dark'
-                style={{marginTop: '2rem'}}
-                type='submit'
-                block>
-                Add Player
-            </Button>
-        )
-    }
-
-    LoadingButton = () => {
-        return (
-            <Button
-                color='dark'
-                style={{marginTop: '2rem'}}
-                block>
-                <Spinner 
-                    as='span'
-                    size='sm'
-                    animation='border'
-                    role='status'
-                />
-                Adding Player...
-            </Button>
-        )
-    }
 
     getPlayer = async(player) => {
         let newPlayer = player;
@@ -129,13 +95,6 @@ class PlayerModal extends Component {
     }
 
     render() {
-        let formButton;
-        console.log(this.state.loading)
-        if (!this.state.loading) {
-            formButton = <this.AddPlayerButton/>
-        } else {
-            formButton = <this.LoadingButton/>
-        }
         return(
             <div>
                 <Button
@@ -161,7 +120,13 @@ class PlayerModal extends Component {
                                     placeholder='Add player to team'
                                     onChange={this.onChange}
                                 />
-                                {formButton}
+                                <Button
+                                    color='dark'
+                                    style={{marginTop: '2rem'}}
+                                    type='submit'
+                                    block>
+                                    Add Player
+                                </Button>
                             </FormGroup>
                         </Form>
                     </ModalBody>
