@@ -5,3 +5,17 @@ export const getPlayers = () => {
         type: GET_PLAYERS
     }
 }
+
+export const deletePlayer = (id) => {
+    return {
+        type: DELETE_PLAYER,
+        payload: id
+    }
+}
+
+export const addPlayer = (player) => {
+    return {
+        type: ADD_PLAYER,
+        payload: player
+    }
+}

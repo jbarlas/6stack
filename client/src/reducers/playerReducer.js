@@ -5,7 +5,7 @@ const initialState = {
     players :[
         {
             id : uuid(), 
-            battletag: "squirtle",
+            battleTag: "squirtle",
             teamid: "team1",
             avgsr: "1234",
             tanksr: "2345",
@@ -15,7 +15,7 @@ const initialState = {
         }, 
         {
             id : uuid(), 
-            battletag: "okay i had to fuck with the store",
+            battleTag: "okay i had to fuck with the store",
             teamid: "team2",
             avgsr: "0989",
             tanksr: "9766",
@@ -31,6 +31,16 @@ export default function(state = initialState, action) {
         case GET_PLAYERS:
             return {
                 ...state
+            };
+        case DELETE_PLAYER:
+            return {
+                ...state,
+                players: state.players.filter(item => item.id !== action.payload)
+            };
+        case ADD_PLAYER:
+            return {
+                ...state,  
+                players: [action.payload, ...state.players]
             }
         default:
             return state;
