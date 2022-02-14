@@ -17,8 +17,7 @@ router.get('/', (req, res) => {
 // @access  Public
 router.post('/add', (req, res) => {
     const newPlayer = new Player({
-        battletag: req.body.battletag,
-        teamid: req.body.teamid,
+        battleTag: req.body.battleTag,
         avgsr: req.body.avgsr,
         tanksr: req.body.tanksr,
         dmgsr: req.body.dmgsr,
@@ -37,8 +36,7 @@ router.post('/update/:id', (req, res) => {
     Player.updateOne(
         {id : req.params.id},
         { $set : {
-            battletag: req.body.battletag,
-            teamid: req.body.teamid,
+            battleTag: req.body.battleTag,
             avgsr: req.body.avgsr,
             tanksr: req.body.tanksr,
             dmgsr: req.body.dmgsr,
@@ -53,7 +51,7 @@ router.post('/update/:id', (req, res) => {
 // @route   DELETE api/players/:id
 // @desc    delete a player 
 // @access  Public
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     Player.findById(req.params.id)
         .then(player => player.remove().then(() => res.json({success : true})))
         .catch(err => res.status(404).json({success : false}));

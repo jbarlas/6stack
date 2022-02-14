@@ -12,7 +12,6 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addPlayer } from '../actions/playerActions';
-import {v1 as uuid} from 'uuid';
 
 class PlayerModal extends Component {
     state = {
@@ -84,7 +83,6 @@ class PlayerModal extends Component {
         e.preventDefault();
 
         let newPlayer = {
-            id: uuid(),
             battleTag: this.state.battleTag,
         }
 

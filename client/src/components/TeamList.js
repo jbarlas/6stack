@@ -33,14 +33,14 @@ class TeamList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {players.map(({ id, battleTag, teamid, avgsr, tanksr, dmgsr, suppsr, topHeros }) => (
-                        <tr>
+                    {players.map(({ _id, battleTag, teamid, avgsr, tanksr, dmgsr, suppsr, topHeros }) => (
+                        <tr key={_id}>
                             <td>
                                 <Button
                                     className='remove-btn'
                                     color='danger'
                                     size='sm'
-                                    onClick={this.onDeleteClick.bind(this, id)}
+                                    onClick={this.onDeleteClick.bind(this, _id)}
                                 >
                                     &times;
                                 </Button>

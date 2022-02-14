@@ -1,21 +1,39 @@
-import { GET_PLAYERS, ADD_PLAYER, DELETE_PLAYER } from "./types";
+import axios from 'axios';
+import { GET_PLAYERS, ADD_PLAYER, DELETE_PLAYER, PLAYERS_LOADING } from "./types";
 
-export const getPlayers = () => {
-    return {
-        type: GET_PLAYERS
-    }
+export const getPlayers = () => dispatch => {
+    dispatch(setPlayersLoading());
+    axios
+        .get('/api/players')
+        .then(res => 
+            dispatch({
+                type: GET_PLAYERS,
+                payload: res.data
+            }))
 }
 
-export const deletePlayer = (id) => {
-    return {
-        type: DELETE_PLAYER,
-        payload: id
-    }
+export const addPlayer = (player) => dispatch => {
+    axios
+        .post('/api/players/add', player)
+        .then(res => 
+            dispatch({
+                type: ADD_PLAYER,
+                payload: res.data
+            }))
 }
 
-export const addPlayer = (player) => {
+export const deletePlayer = (id) => dispatch => {
+    axios
+        .delete(`/api/players/delete/${id}`)
+        .then(res => 
+            dispatch({
+                type: DELETE_PLAYER,
+                payload: id
+            }))
+}
+
+export const setPlayersLoading = () => {
     return {
-        type: ADD_PLAYER,
-        payload: player
-    }
+        type: PLAYERS_LOADING
+    };
 }

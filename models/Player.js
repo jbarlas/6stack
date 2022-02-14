@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 
 // create schema 
 const PlayerSchema = new Schema({
-    battletag : {
+    battleTag : {
         type : String,
         required : true
     },
     teamid : {
         type : String,
-        required : true
+        required : false
     },
     platform : {
         type : String,
@@ -21,23 +21,23 @@ const PlayerSchema = new Schema({
     }, 
     avgsr : {
         type : String, 
-        required : true
+        required : false
     },
     tanksr : {
         type : String, 
-        required : true
+        required : false
     }, 
     dmgsr : {
         type : String, 
-        required : true
+        required : false
     }, 
     suppsr : {
         type : String, 
-        required : true
+        required : false
     },
     topHeros : {
-        type : [], 
-        required : true
+        type : String, 
+        required : false
     }, 
 });
 
