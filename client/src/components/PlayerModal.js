@@ -47,7 +47,18 @@ class PlayerModal extends Component {
                 newPlayer.avgsr = "N/A";
             } else {
                 const herosPlayed = Object.entries(json.competitiveStats.topHeroes);
-                const sortedHeros = herosPlayed.sort((a, b) => {return (a[1].timePlayed > b[1].timePlayed) ? -1 : 1});
+                console.log(herosPlayed);
+                const sortedHeros = herosPlayed.sort((a, b) => {
+                    let a_greater = true;
+                    if (a[1].timePlayed.length < b[1].timePlayed.length) {
+                        a_greater = false;
+                    } else if (a[1].timePlayed.length > b[1].timePlayed.length) {
+                        a_greater = true;
+                    } else {
+                        a_greater = a[1].timePlayed > b[1].timePlayed;
+                    }
+                    return (a_greater ? -1 : 1);
+                });
                 console.log(sortedHeros);
                 let topHeros = [];
                 if (sortedHeros.length > 5) {
