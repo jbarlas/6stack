@@ -12,12 +12,17 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addPlayer } from '../actions/playerActions';
+import { PropTypes } from 'prop-types';
 
 class PlayerModal extends Component {
     state = {
         modal: false,
         loading: false,
         battleTag: '',
+    };
+
+    static propTypes = {
+        isAuthenticated: PropTypes.bool
     }
 
     toggle = () => {
@@ -106,12 +111,16 @@ class PlayerModal extends Component {
     render() {
         return(
             <div>
-                <Button
-                    color='dark'
-                    style={{marginBottom:'2rem'}}
-                    onClick={this.toggle}
-                    >Add Player
-                </Button>
+
+                { this.props.isAuthenticated ? 
+                    <Button
+                        color='dark'
+                        style={{marginBottom:'2rem'}}
+                        onClick={this.toggle}
+                        >Add Player
+                    </Button> :
+                    <h4 className='mb-3 ml-4'>Please log in to add players</h4>
+                }
 
                 <Modal
                     isOpen={this.state.modal}
@@ -146,7 +155,8 @@ class PlayerModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    player: state.player
+    player: state.player,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(
