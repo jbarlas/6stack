@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../../middleware/auth')
 
-// Player model
+// Team model
 const Team = require('../../models/Team');
 
 // @route   GET api/teams
@@ -19,9 +20,6 @@ router.post('/add', (req, res) => {
     const newTeam = new Team({
         name: req.body.name,
         players: req.body.players,
-        avgsr: req.body.avgsr,
-        comp: req.body.comp, 
-        lfcomp: req.body.lfcomp
     });
 
     newTeam.save()
@@ -49,7 +47,7 @@ router.post('/update/:id', (req, res) => {
 // @route   DELETE api/teams/:id
 // @desc    delete a team 
 // @access  Public
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     Team.findById(req.params.id)
         .then(team => team.remove().then(() => res.json({success : true})))
         .catch(err => res.status(404).json({success : false}));

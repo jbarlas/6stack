@@ -22,7 +22,8 @@ class PlayerModal extends Component {
     };
 
     static propTypes = {
-        isAuthenticated: PropTypes.bool
+        isAuthenticated: PropTypes.bool,
+        user: PropTypes.object
     }
 
     toggle = () => {
@@ -156,7 +157,7 @@ class PlayerModal extends Component {
 
 const mapStateToProps = (state) => ({
     player: state.player,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(

@@ -8,21 +8,8 @@ const TeamSchema = new Schema({
         required : true
     }, 
     players : {
-        type : [], 
-        required : true
+        type : []
     }, 
-    avgsr : {
-        type : String, 
-        required : true
-    }, 
-    comp : {
-        type : [], 
-        required : true
-    },  
-    lfcomp : {
-        type : [], 
-        required : true
-    }
 });
 
 module.exports = Team = mongoose.model('team', TeamSchema);

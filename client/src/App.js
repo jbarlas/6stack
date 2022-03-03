@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
-import TeamList from './components/TeamList'
+import PlayerList from './components/PlayerList';
 import PlayerModal from './components/PlayerModal';
+import TeamModal from './components/TeamModal';
+import TeamList from './components/TeamList';
 import { Container } from 'reactstrap';
 
 import { Provider } from 'react-redux';
@@ -23,7 +25,9 @@ class App extends Component {
           <AppNavbar/>
           <Container>
             <PlayerModal/>
+            <TeamModal/>
             <TeamList/>
+            <PlayerList/>
           </Container>
         </div>
       </Provider>

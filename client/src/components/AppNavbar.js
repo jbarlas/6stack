@@ -7,7 +7,8 @@ import {
     Nav, 
     NavItem, 
     NavLink, 
-    Container
+    Container,
+    NavbarText
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -35,11 +36,11 @@ class AppNavbar extends Component {
 
         const authLinks = (
             <Fragment>
-                <NavItem>
-                    <span className="navbar-text mr-3">
+                <NavbarText>
+                    <span className="navbar-text">
                         <strong>{ user ? `Welcome ${user.name}` : ''}</strong>
                     </span>
-                </NavItem>
+                </NavbarText>
                 <NavItem>
                     <Logout/>
                 </NavItem>
@@ -61,7 +62,7 @@ class AppNavbar extends Component {
         
         <div>
             <Navbar color="dark" dark expand="sm" className="mb-5">
-                <NavbarBrand href="/">
+                <NavbarBrand>
                     <img 
                         alt="owlogo" 
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Overwatch_circle_logo.svg/1024px-Overwatch_circle_logo.svg.png" 

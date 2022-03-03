@@ -6,7 +6,8 @@ const config = require('config')
 const players = require('./routes/api/players');
 const teams = require('./routes/api/teams');
 const users = require('./routes/api/users');
-const auth = require('./routes/api/auth')
+const auth = require('./routes/api/auth');
+
 
 
 
@@ -26,9 +27,9 @@ mongoose
 
 // use routes 
 app.use('/api/players', players);
-app.use('/api/teams', teams)
-app.use('/api/users', users)
-app.use('/api/auth', auth)
+app.use('/api/teams', teams);
+app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
