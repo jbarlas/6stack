@@ -5,7 +5,9 @@ import { Container,
     Button, 
     Table, 
     UncontrolledAccordion, 
+    Accordion,
     AccordionItem, 
+    AccordionBody,
     AccordionHeader, 
  } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -13,13 +15,19 @@ import { connect } from 'react-redux';
 import { getTeams, deleteTeam } from '../actions/teamActions'
 import teamReducer from '../reducers/teamReducer';
 import PropTypes from 'prop-types';
+import PlayerModal from './PlayerModal';
 
 class TeamList extends Component {
 
     static propTypes = {
         getTeams: PropTypes.func.isRequired, 
         team: PropTypes.object.isRequired,
-        isAuthenticated: PropTypes.bool
+        isAuthenticated: PropTypes.bool,
+    }
+
+
+    state = {
+        openTeams: []
     }
 
     componentDidMount() {
@@ -30,24 +38,34 @@ class TeamList extends Component {
         this.props.deleteTeam(id);
     } 
 
+    toggle = (id) => {
+        if (this.state.openTeams.includes(id)) {
+            this.setState({openTeams: this.state.openTeams.filter(teamId => teamId !== id)})
+        } else {
+            this.setState({openTeams: [...this.state.openTeams, id]});
+        }
+    }
+
     render () {
         const { teams } = this.props.team;
         return (
             <Container>
-                <UncontrolledAccordion
-
+                <Accordion
+                    flush
+                    open={this.state.openTeams}
+                    toggle={this.toggle}
                 >
-                    {teams.map(({name, players, _id}) => (
-                        <AccordionItem toggler= '#toggler' key={_id}>
-                            <AccordionHeader targetId={_id}>
+                    {teams.map(({name, players, _id}) => 
+                        <AccordionItem accordionId={_id.toString()}>
+                            <AccordionHeader targetId={_id.toString()}>
                                 {name}
                             </AccordionHeader>
-                            <AccordionItem accordionid={_id}>
+                            <AccordionBody accordionId={_id.toString()}>
                                 This is where the list of players in the team will go
-                            </AccordionItem>
-                        </AccordionItem>
-                    ))}
-                </UncontrolledAccordion>
+                                <PlayerModal teamid={_id}/>
+                            </AccordionBody>
+                        </AccordionItem>)}
+                </Accordion>
             </Container>
         );
     }

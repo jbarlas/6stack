@@ -14,9 +14,9 @@ export default function(state = initialState, action) {
                 loading: false
             };
         case DELETE_TEAM:
-            return {
+            return {    
                 ...state,
-                teams: state.players.filter(team => team._id !== action.payload)
+                teams: state.teams.filter(team => team._id !== action.payload)
             };
         case ADD_TEAM:
             return {

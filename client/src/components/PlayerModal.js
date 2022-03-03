@@ -19,11 +19,13 @@ class PlayerModal extends Component {
         modal: false,
         loading: false,
         battleTag: '',
+        teamid: this.props.teamid
     };
 
     static propTypes = {
         isAuthenticated: PropTypes.bool,
-        user: PropTypes.object
+        user: PropTypes.object,
+        team: PropTypes.object.isRequired
     }
 
     toggle = () => {
@@ -122,7 +124,6 @@ class PlayerModal extends Component {
                     </Button> :
                     <h4 className='mb-3 ml-4'>Please log in to add players</h4>
                 }
-
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}

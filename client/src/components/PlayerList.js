@@ -13,7 +13,7 @@ class PlayerList extends Component {
         player: PropTypes.object.isRequired,
         isAuthenticated: PropTypes.bool
     }
-
+    
     componentDidMount() {
         this.props.getPlayers();
     }
