@@ -30,17 +30,14 @@ router.post('/add', (req, res) => {
 // @desc    update a team 
 // @access  Public
 router.post('/update/:id', (req, res) => {
-    Team.updateOne(
-        {id : req.params.id},
+    Team.findOneAndUpdate(
+        {id : req.body._id},
         { $set : {
             name: req.body.name,
             players: req.body.players,
-            avgsr: req.body.avgsr,
-            comp: req.body.comp, 
-            lfcomp: req.body.lfcomp
             }
         })
-        .then(res.status(200).json({ success: true }))
+        .then(res.json(req.body))
         .catch(err => res.status(404).json({success : false}));
 });
 

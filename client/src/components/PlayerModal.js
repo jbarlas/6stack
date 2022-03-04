@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addPlayer } from '../actions/playerActions';
+import { updateTeam } from '../actions/teamActions';
 import { PropTypes } from 'prop-types';
 
 class PlayerModal extends Component {
@@ -19,7 +20,8 @@ class PlayerModal extends Component {
         modal: false,
         loading: false,
         battleTag: '',
-        teamid: this.props.teamid
+        teamid: this.props.teamid,
+        team: this.props.team
     };
 
     static propTypes = {
@@ -34,12 +36,6 @@ class PlayerModal extends Component {
         });
     }
 
-    setLoading = () => {
-        this.setState({ 
-            loading: !this.state.loading
-        });
-    }
-
     onChange = (e) => {
         this.setState({ battleTag: e.target.value });
     }
@@ -47,6 +43,7 @@ class PlayerModal extends Component {
 
     getPlayer = async(player) => {
         let newPlayer = player;
+        let teamToUpdate = this.props.teams.find(team => team._id === this.state.teamid)
         await fetch(`https://ow-api.com/v1/stats/pc/us/${ newPlayer.battleTag }/complete`)
             .then(response => response.json())
             .then(json => {
@@ -90,6 +87,8 @@ class PlayerModal extends Component {
                 newPlayer.topHeros = topHeros.map(hero => hero[0]).join(', ');
             };
             console.log("newplayer here", newPlayer);
+            teamToUpdate.players.push(newPlayer);
+            this.props.updateTeam(teamToUpdate);
             this.props.addPlayer(newPlayer);
             })
             .catch(error => {
@@ -157,11 +156,12 @@ class PlayerModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    teams: state.team.teams,
     player: state.player,
     isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(
     mapStateToProps, 
-    { addPlayer }
+    { addPlayer,  updateTeam }
 ) (PlayerModal);

@@ -16,6 +16,7 @@ import { getTeams, deleteTeam } from '../actions/teamActions'
 import teamReducer from '../reducers/teamReducer';
 import PropTypes from 'prop-types';
 import PlayerModal from './PlayerModal';
+import PlayerList from './PlayerList';
 
 class TeamList extends Component {
 
@@ -47,7 +48,7 @@ class TeamList extends Component {
     }
 
     render () {
-        const { teams } = this.props.team;
+        const { teams } = this.props.teams;
         return (
             <Container>
                 <Accordion
@@ -61,7 +62,7 @@ class TeamList extends Component {
                                 {name}
                             </AccordionHeader>
                             <AccordionBody accordionId={_id.toString()}>
-                                This is where the list of players in the team will go
+                                <PlayerList teamid={_id} players={players}/>
                                 <PlayerModal teamid={_id}/>
                             </AccordionBody>
                         </AccordionItem>)}
@@ -73,7 +74,7 @@ class TeamList extends Component {
 
 
 const mapStateToProps = (state) => ({
-    team: state.team,
+    teams: state.team,
     isAuthenticated: state.auth.isAuthenticated,
 });
 

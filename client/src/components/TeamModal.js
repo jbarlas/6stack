@@ -67,7 +67,7 @@ class TeamModal extends Component {
                         onClick={this.toggle}
                         >Add Team
                     </Button> :
-                    null
+                    <h4 className='mb-3 ml-4'>Please log in to create a team</h4>
                 }
 
                 <Modal
@@ -103,7 +103,7 @@ class TeamModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    team: state.team,
+    teams: state.team,
     isAuthenticated: state.auth.isAuthenticated,
 });
 

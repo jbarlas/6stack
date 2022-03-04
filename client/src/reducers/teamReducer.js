@@ -1,4 +1,4 @@
-import { GET_TEAMS, ADD_TEAM, DELETE_TEAM, TEAMS_LOADING } from "../actions/types";
+import { GET_TEAMS, ADD_TEAM, UPDATE_TEAM, DELETE_TEAM, TEAMS_LOADING } from "../actions/types";
 
 const initialState = {
     teams : [],
@@ -14,7 +14,7 @@ export default function(state = initialState, action) {
                 loading: false
             };
         case DELETE_TEAM:
-            return {    
+            return {        
                 ...state,
                 teams: state.teams.filter(team => team._id !== action.payload)
             };
@@ -22,6 +22,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,  
                 teams: [...state.teams, action.payload]
+            };
+        case UPDATE_TEAM:
+            return {
+                ...state,
+                teams: state.teams.map(team => (team._id === action.payload._id) ? team = action.payload : team)
             };
         case TEAMS_LOADING:
             return {

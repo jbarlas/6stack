@@ -24,10 +24,8 @@ class App extends Component {
         <div className="App">
           <AppNavbar/>
           <Container>
-            <PlayerModal/>
             <TeamModal/>
             <TeamList/>
-            <PlayerList/>
           </Container>
         </div>
       </Provider>

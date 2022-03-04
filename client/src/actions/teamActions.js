@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TEAMS, ADD_TEAM, DELETE_TEAM, TEAMS_LOADING } from "./types";
+import { GET_TEAMS, ADD_TEAM, UPDATE_TEAM, DELETE_TEAM, TEAMS_LOADING } from "./types";
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
@@ -24,6 +24,18 @@ export const addTeam = (team) => (dispatch, getState) => {
                 payload: res.data
             }))
             .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)))
+}
+
+export const updateTeam = (updatedTeam) => (dispatch, getState) => {
+    dispatch(setTeamsLoading());
+    axios
+        .post(`/api/teams/update/${updatedTeam._id}`, updatedTeam, tokenConfig(getState))
+        .then(res => 
+            dispatch({
+                type: UPDATE_TEAM,
+                payload: res.data
+            }))
+        .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 export const deleteTeam = (id) => (dispatch, getState) => {
