@@ -107,7 +107,7 @@ class PlayerModal extends Component {
         e.preventDefault();
 
         let newPlayer = {
-            battleTag: this.state.battleTag,
+            battleTag: this.state.battleTag.replace('#', '-'),
         }
 
         this.getPlayer(newPlayer)
