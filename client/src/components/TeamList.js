@@ -22,13 +22,14 @@ class TeamList extends Component {
 
     static propTypes = {
         getTeams: PropTypes.func.isRequired, 
-        team: PropTypes.object.isRequired,
+        teams: PropTypes.object,
         isAuthenticated: PropTypes.bool,
     }
 
 
     state = {
-        openTeams: []
+        openTeams: [],
+        teams: this.props.teams
     }
 
     componentDidMount() {
@@ -47,6 +48,10 @@ class TeamList extends Component {
         }
     }
 
+    updateteamlist = (teams) => { 
+        this.setState({teams: teams})
+    }
+
     render () {
         const { teams } = this.props.teams;
         return (
@@ -62,8 +67,18 @@ class TeamList extends Component {
                                 {name}
                             </AccordionHeader>
                             <AccordionBody accordionId={_id.toString()}>
+                                <PlayerModal teamid={_id} updateteamlist={this.updateteamlist}/>
                                 <PlayerList teamid={_id} players={players}/>
-                                <PlayerModal teamid={_id}/>
+                                { this.props.isAuthenticated ? 
+                                <Button
+                                    className='remove-btn'
+                                    color='danger'
+                                    size='sm'
+                                    onClick={this.onDeleteClick.bind(this, _id)}
+                                >
+                                    Delete Team
+                                </Button> : null
+                                }
                             </AccordionBody>
                         </AccordionItem>)}
                 </Accordion>

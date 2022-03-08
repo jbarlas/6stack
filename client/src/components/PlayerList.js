@@ -31,7 +31,7 @@ class PlayerList extends Component {
         console.log(filteredPlayers);
         let teamToUpdate = this.props.teams.find(team => team._id === this.state.teamid);
         teamToUpdate.players = filteredPlayers;
-        this.state.players = filteredPlayers;
+        this.setState({ players : filteredPlayers });
         this.props.updateTeam(teamToUpdate);
     } 
 

@@ -20,13 +20,15 @@ export default function(state = initialState, action) {
             };
         case ADD_TEAM:
             return {
-                ...state,  
+                ...state,
                 teams: [...state.teams, action.payload]
             };
         case UPDATE_TEAM:
+            console.log("update team called to update: ", action.payload);
             return {
                 ...state,
-                teams: state.teams.map(team => (team._id === action.payload._id) ? team = action.payload : team)
+                teams: [...state.teams.map(team => (team._id === action.payload._id) ? team = action.payload : team)],
+                loading: false
             };
         case TEAMS_LOADING:
             return {

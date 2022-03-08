@@ -21,13 +21,13 @@ class PlayerModal extends Component {
         loading: false,
         battleTag: '',
         teamid: this.props.teamid,
-        team: this.props.team
+        teams: this.props.teams
     };
 
     static propTypes = {
         isAuthenticated: PropTypes.bool,
         user: PropTypes.object,
-        team: PropTypes.object.isRequired
+        teams: PropTypes.object.isRequired,
     }
 
     toggle = () => {
@@ -43,7 +43,7 @@ class PlayerModal extends Component {
 
     getPlayer = async(player) => {
         let newPlayer = player;
-        let teamToUpdate = this.props.teams.find(team => team._id === this.state.teamid)
+        let teamToUpdate = this.state.teams.find(team => team._id === this.state.teamid)
         await fetch(`https://ow-api.com/v1/stats/pc/us/${ newPlayer.battleTag }/complete`)
             .then(response => response.json())
             .then(json => {
@@ -86,10 +86,16 @@ class PlayerModal extends Component {
                 newPlayer.avgsr = json.rating;
                 newPlayer.topHeros = topHeros.map(hero => hero[0]).join(', ');
             };
+            console.log(this.props.teams);
             console.log("newplayer here", newPlayer);
+            console.log("team to update before adding player", teamToUpdate);
             teamToUpdate.players.push(newPlayer);
+            this.setState({ teams: this.state.teams.map(team => (team._id === teamToUpdate._id) ? teamToUpdate : team ) })
+            console.log("team to update after adding player", teamToUpdate)
+            console.log("state teams", this.state.teams)
+            this.props.updateteamlist(this.state.teams);
             this.props.updateTeam(teamToUpdate);
-            this.props.addPlayer(newPlayer);
+            //this.props.addPlayer(newPlayer);
             })
             .catch(error => {
             window.alert(error);
@@ -163,5 +169,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps, 
-    { addPlayer,  updateTeam }
+    { addPlayer, updateTeam }
 ) (PlayerModal);

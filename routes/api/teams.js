@@ -30,8 +30,8 @@ router.post('/add', (req, res) => {
 // @desc    update a team 
 // @access  Public
 router.post('/update/:id', (req, res) => {
-    Team.findOneAndUpdate(
-        {id : req.body._id},
+    Team.updateOne(
+        {_id : req.body._id},
         { $set : {
             name: req.body.name,
             players: req.body.players,
